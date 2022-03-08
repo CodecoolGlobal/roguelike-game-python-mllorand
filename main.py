@@ -9,7 +9,6 @@ PLAYER_START_Y = 3
 BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
 
-
 def create_player():
     '''
     Creates a 'player' dictionary for storing all player related informations - i.e. player icon, player position.
@@ -18,7 +17,7 @@ def create_player():
     Returns:
     dictionary
     '''
-    pass
+    return {"icon": PLAYER_ICON, "coord": (PLAYER_START_X, PLAYER_START_Y)}
 
 
 def main():
