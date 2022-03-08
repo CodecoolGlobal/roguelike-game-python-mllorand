@@ -28,3 +28,24 @@ def put_player_on_board(board, player):
     y = player['coord'][1]
     icon = player['icon']
     board[x][y] = icon
+    
+    
+def move(board, player, key):
+    board[player['coord'][0]][player['coord'][1]] = " "
+    move = {'coord': (player['coord'][0], player['coord'][1])}
+    if key == 'C':
+        if board[player['coord'][0]][player['coord'][1] + 1] == ' ':
+            move = {'coord': (player['coord'][0], player['coord'][1] + 1)}
+    if key == 'D':
+        if board[player['coord'][0]][player['coord'][1] - 1] == ' ':
+            move = {'coord': (player['coord'][0], player['coord'][1] - 1)}
+    if key == 'A':
+        if board[player['coord'][0] - 1][player['coord'][1]] == ' ':
+            move = {'coord': (player['coord'][0] - 1, player['coord'][1])}
+    if key == 'B':
+        if board[player['coord'][0] + 1][player['coord'][1]] == ' ':
+            move = {'coord': (player['coord'][0] + 1, player['coord'][1])}  
+    player.update(move)
+    
+
+
