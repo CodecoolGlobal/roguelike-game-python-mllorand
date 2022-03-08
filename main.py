@@ -2,7 +2,7 @@ import util
 import engine
 import ui
 
-PLAYER_ICON = '♟'
+PLAYER_ICON = '🕴️'
 PLAYER_START_X = 3
 PLAYER_START_Y = 3
 
