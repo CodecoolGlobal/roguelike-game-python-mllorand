@@ -1,6 +1,7 @@
 import util
 import engine
 import ui
+import levels
 
 
 PLAYER_ICON = '🕴️'
@@ -24,8 +25,8 @@ def create_player():
 
 def main():
     player = create_player()
-    board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
-
+    # board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
+    board = levels.create_level_one(BOARD_WIDTH, BOARD_HEIGHT)
     util.clear_screen()
     is_running = True
     while is_running:

@@ -47,5 +47,3 @@ def move(board, player, key):
             move = {'coord': (player['coord'][0] + 1, player['coord'][1])}  
     player.update(move)
     
-
-
