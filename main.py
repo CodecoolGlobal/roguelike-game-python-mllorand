@@ -2,6 +2,10 @@ import util
 import engine
 import ui
 
+BOMB = '💣'
+KNIFE = '🔪'
+COIN = '💰'
+FOOD = '🍆'
 PLAYER_ICON = '🕴️'
 PLAYER_START_X = 3
 PLAYER_START_Y = 3
