@@ -7,4 +7,3 @@ def display_board(board):
     '''   
     for i in range(len(board)):
         print(f"{' '.join(board[i])}")
-
