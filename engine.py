@@ -13,14 +13,7 @@ def create_board(width, height):
 
 
 def put_player_on_board(board, player):
-    '''
-    Modifies the game board by placing the player icon at its coordinates.
-
-    Args:
-    list: The game board
-    dictionary: The player information containing the icon and coordinates
-
-    Returns:
-    Nothing
-    '''
-    pass
+    x = player['coord'][0]
+    y = player['coord'][1]
+    icon = player['icon']
+    board[x][y] = icon
