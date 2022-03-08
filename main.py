@@ -29,10 +29,11 @@ def main():
     while is_running:
         engine.put_player_on_board(board, player)
         ui.display_board(board)
-
         key = util.key_pressed()
         if key == 'q':
             is_running = False
+        if key in ['A', 'B', 'C', 'D']:
+            engine.move(board, player, key)
         else:
             pass
         util.clear_screen()
