@@ -1,6 +1,3 @@
-from turtle import width
-
-
 def create_board(width, height):
     '''
     Creates a new game board based on input parameters.
@@ -24,6 +21,7 @@ def create_board(width, height):
         left_right[0] = "▩"
         left_right[-1] = "▩"
     return board
+
 
 def put_player_on_board(board, player):
     x = player['coord'][0]
