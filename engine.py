@@ -33,16 +33,16 @@ def put_player_on_board(board, player):
 def move(board, player, key):
     board[player['coord'][0]][player['coord'][1]] = " "
     move = {'coord': (player['coord'][0], player['coord'][1])}
-    if key == 'C':
+    if key == 'd':
         if board[player['coord'][0]][player['coord'][1] + 1] == ' ':
             move = {'coord': (player['coord'][0], player['coord'][1] + 1)}
-    if key == 'D':
+    if key == 'a':
         if board[player['coord'][0]][player['coord'][1] - 1] == ' ':
             move = {'coord': (player['coord'][0], player['coord'][1] - 1)}
-    if key == 'A':
+    if key == 'w':
         if board[player['coord'][0] - 1][player['coord'][1]] == ' ':
             move = {'coord': (player['coord'][0] - 1, player['coord'][1])}
-    if key == 'B':
+    if key == 's':
         if board[player['coord'][0] + 1][player['coord'][1]] == ' ':
             move = {'coord': (player['coord'][0] + 1, player['coord'][1])}  
     player.update(move)

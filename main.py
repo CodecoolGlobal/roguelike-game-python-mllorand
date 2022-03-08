@@ -32,7 +32,7 @@ def main():
         key = util.key_pressed()
         if key == 'q':
             is_running = False
-        if key in ['A', 'B', 'C', 'D']:
+        if key in ['w', 's', 'a', 'd']:
             engine.move(board, player, key)
         else:
             pass
