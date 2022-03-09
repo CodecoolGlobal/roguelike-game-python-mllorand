@@ -3,6 +3,8 @@ from engine import create_board
 from ui import display_board
 import gameitems
 import colorama
+from time import sleep
+from util import clear_screen
 from colorama import Fore, Back, Style
 colorama.init(autoreset=True)
 
@@ -139,15 +141,59 @@ def create_obstacles(board, wall_length, direction):
 
 
 def create_random_level(board, number_of_obstacles, min_size_of_obstacles, max_size_of_obstacles):
+    coordinates_of_items = set()
     for _ in range(number_of_obstacles):
         create_obstacles(board, random.randint(min_size_of_obstacles, max_size_of_obstacles), random.choice(['vertical', 'horizontal']))
+    for item in gameitems.items:
+        row, column = random.randint(1, 18), random.randint(1, 28)
+        while board[row][column] != ' ':
+            row, column = random.randint(1, 18), random.randint(1, 28)
+        board[row][column] = item['icon']
+        coordinates_of_items.add((row, column))
+    return coordinates_of_items
+
+
+def validate_board(board, player_position, coordinates_of_items):
+    reachable_coordinates = set()
+    player_neighbours = get_neighbour_coordinates(player_position)
+    for coordinate in player_neighbours:
+        row, column = coordinate
+        if board[row][column] not in ("▩", Fore.BLUE + "▩"):
+            reachable_coordinates.add(coordinate)
+    found_all_reachables = False
+    while not found_all_reachables:
+        temp = set()
+        old_length_of_reachables = len(reachable_coordinates)
+        for coordinate in reachable_coordinates:
+            reachables_neighbours = get_neighbour_coordinates(coordinate)
+            for neighbour in reachables_neighbours:
+                row, column = neighbour
+                try:
+                    if board[row][column] not in ("▩", Fore.BLUE + "▩"):
+                        temp.add(neighbour)
+                except IndexError:
+                    continue
+        reachable_coordinates.update(temp)
+        new_length_of_reachables = len(reachable_coordinates)
+        if new_length_of_reachables == old_length_of_reachables:
+            found_all_reachables = True
+    if coordinates_of_items.issubset(reachable_coordinates):
+        return True
+    else:
+        return False
+
+
+def get_neighbour_coordinates(coordinate):
+    row, col = coordinate
+    return [(row, col - 1), (row, col + 1), (row - 1, col), (row + 1, col)]
 
 
 # while True:
 #     board = create_board(30, 20)
-#     create_random_level(10, 3, 12)
+#     items_coordinates = create_random_level(board, 100, 1, 5)
+#     is_valid_board = validate_board(board, (2, 2), items_coordinates)
 #     display_board(board)
+#     if is_valid_board:
+#         break
 #     sleep(1)
 #     clear_screen()
-
-# create_level_one(width=30, height=20)
