@@ -1,5 +1,8 @@
+import random
+from time import sleep
 from engine import create_board
 from ui import display_board
+from util import clear_screen
 
 
 def create_level_one(width, height):
@@ -31,8 +34,37 @@ def create_level_two(board):
     pass
 
 
-def create_level_three(board):
-    pass
+def create_obstacles(board, wall_length, direction):
+    while True:
+        column = random.randint(1, 29)
+        row = random.randint(1, 19)
+        try:
+            if direction == 'horizontal':
+                for i in range(column, column + wall_length):
+                    board[row][i] = "▩"
+                break
+            elif direction == 'vertical':
+                for i in range(row, row + wall_length):
+                    board[i][column] = "▩"
+                break
+        except IndexError:
+            continue
 
 
-create_level_one(width=30, height=20)
+def create_random_level(number_of_obstacles, min_size_of_obstacles, max_size_of_obstacles):
+    for _ in range(number_of_obstacles):
+        create_obstacles(board, random.randint(min_size_of_obstacles, max_size_of_obstacles), random.choice(['vertical', 'horizontal']))
+
+
+while True:
+    board = create_board(30, 20)
+    create_random_level(10, 3, 12)
+    display_board(board)
+    sleep(1)
+    clear_screen()
+
+
+
+
+
+#create_level_one(width=30, height=20)

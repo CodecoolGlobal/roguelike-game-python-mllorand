@@ -9,7 +9,7 @@ def display_board(board):
         print(f"{' '.join(board[i])}")
 
 
-def print_table(inventory, order=None):
+def display_player_inventory(inventory, order=None):
     if order == 'count,asc':
         inventory = sorted(inventory.items(), key=lambda kv: kv[1])
     elif order == 'count,desc':
