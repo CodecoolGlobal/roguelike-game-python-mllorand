@@ -2,7 +2,9 @@ import random
 from engine import create_board
 from ui import display_board
 import gameitems
-
+import colorama
+from colorama import Fore, Back, Style
+colorama.init(autoreset=True)
 
 def create_level_one(width, height):
     board = create_board(width=30, height=20)

@@ -1,6 +1,8 @@
 import random
 import gameitems
-
+import colorama
+from colorama import Fore, Back, Style
+colorama.init(autoreset=True)
 
 def create_board(width, height):
     '''
@@ -18,7 +20,7 @@ def create_board(width, height):
         board.append([])
         for j in range(width):
             if i == 0 or i == height - 1:
-                board[i].append("▩")
+                board[i].append(Fore.BLUE +  "▩")
             else:
                 board[i].append(" ")
     for left_right in board:
