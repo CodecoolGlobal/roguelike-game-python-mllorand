@@ -135,17 +135,17 @@ def create_obstacles(board, wall_length, direction):
             continue
 
 
-def create_random_level(number_of_obstacles, min_size_of_obstacles, max_size_of_obstacles):
+def create_random_level(board, number_of_obstacles, min_size_of_obstacles, max_size_of_obstacles):
     for _ in range(number_of_obstacles):
         create_obstacles(board, random.randint(min_size_of_obstacles, max_size_of_obstacles), random.choice(['vertical', 'horizontal']))
 
 
-while True:
-    board = create_board(30, 20)
-    create_random_level(10, 3, 12)
-    display_board(board)
-    sleep(1)
-    clear_screen()
+# while True:
+#     board = create_board(30, 20)
+#     create_random_level(10, 3, 12)
+#     display_board(board)
+#     sleep(1)
+#     clear_screen()
 
 
 
