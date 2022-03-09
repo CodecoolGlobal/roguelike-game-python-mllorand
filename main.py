@@ -4,8 +4,8 @@ import engine
 import ui
 import levels
 
-
-PLAYER_ICON = '♔'
+ENEMY_ICON = '𓆗'
+PLAYER_ICON = '𓃱'
 PLAYER_START_X = 3
 PLAYER_START_Y = 3
 

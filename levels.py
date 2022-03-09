@@ -103,7 +103,7 @@ def create_level_one(width, height):
     board[5][9] = '€'
     board[9][23] = '€'
     board[18][1] = '€'
-    board[3][26] ='☭'
+    board[3][26] ='➹'
     board[8][18] ='☢'
     board[15][24] ='☢'
     board[7][3] ='☢'
