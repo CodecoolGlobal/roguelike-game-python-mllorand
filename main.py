@@ -5,7 +5,7 @@ import ui
 import levels
 
 
-PLAYER_ICON = '🕴️'
+PLAYER_ICON = '♔'
 PLAYER_START_X = 3
 PLAYER_START_Y = 3
 
@@ -39,7 +39,7 @@ def main():
         if key in ['w', 's', 'a', 'd']:
             engine.move(board, player, key)
         if key == 'i':
-            print(player['inventory'], player['hp'])
+            print('Backpack:',player['inventory'],"\nHP:",player['hp'])
             sleep(2)
         else:
             pass
