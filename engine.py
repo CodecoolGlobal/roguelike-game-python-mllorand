@@ -34,16 +34,16 @@ def move(board, player, key):
     board[player['coord'][0]][player['coord'][1]] = " "
     move = {'coord': (player['coord'][0], player['coord'][1])}
     if key == 'd':
-        if board[player['coord'][0]][player['coord'][1] + 1] == ' ':
+        if board[player['coord'][0]][player['coord'][1] + 1] != '▩':
             move = {'coord': (player['coord'][0], player['coord'][1] + 1)}
     if key == 'a':
-        if board[player['coord'][0]][player['coord'][1] - 1] == ' ':
+        if board[player['coord'][0]][player['coord'][1] - 1] != '▩':
             move = {'coord': (player['coord'][0], player['coord'][1] - 1)}
     if key == 'w':
-        if board[player['coord'][0] - 1][player['coord'][1]] == ' ':
+        if board[player['coord'][0] - 1][player['coord'][1]] != '▩':
             move = {'coord': (player['coord'][0] - 1, player['coord'][1])}
     if key == 's':
-        if board[player['coord'][0] + 1][player['coord'][1]] == ' ':
+        if board[player['coord'][0] + 1][player['coord'][1]] != '▩':
             move = {'coord': (player['coord'][0] + 1, player['coord'][1])}  
     player.update(move)
     
