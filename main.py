@@ -1,10 +1,11 @@
+from time import sleep
 import util
 import engine
 import ui
 import levels
 
 
-PLAYER_ICON = '🕴️'
+PLAYER_ICON = '♔'
 PLAYER_START_X = 3
 PLAYER_START_Y = 3
 
@@ -20,7 +21,7 @@ def create_player():
     Returns:
     dictionary
     '''
-    return {"icon": PLAYER_ICON, "coord": (PLAYER_START_X, PLAYER_START_Y)}
+    return {"icon": PLAYER_ICON, "coord": (PLAYER_START_X, PLAYER_START_Y), "inventory":{}, "hp": 100}
 
 
 def main():
@@ -37,6 +38,9 @@ def main():
             is_running = False
         if key in ['w', 's', 'a', 'd']:
             engine.move(board, player, key)
+        if key == 'i':
+            print('Backpack:',player['inventory'],"\nHP:",player['hp'])
+            sleep(2)
         else:
             pass
         util.clear_screen()
