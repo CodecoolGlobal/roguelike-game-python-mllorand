@@ -6,14 +6,24 @@ def create_level_one(width, height):
     board = create_board(width=30, height=20)
     for i in range(width):
         for j in range(height):
-            if i == 8 and j >= 8 and j < 18:
+            if i == 8 and j >= 6 and j < 16:
                 board[i][j] = "▩"
-            if i == 14 and j >= 1 and j < 18:
+            if i == 11 and j >= 1 and j < 18:
                 board[i][j] = "▩"
-            if j == 8 and i >= 2 and i < 9:
+            if j == 6 and i >= 2 and i < 9:
                 board[i][j] = "▩"
-   
-    board[5][4] = '💰'
+            if i == 2 and j >= 6 and j < 16:
+                board[i][j] = "▩"
+            if j == 15 and i >= 4 and i < 9:
+                board[i][j] = "▩"
+            if i == 4 and j >= 8 and j < 15:
+                board[i][j] = "▩"
+            if j == 8 and i >= 5 and i < 7:
+                board[i][j] = "▩"
+            if i == 6 and j >= 8 and j < 14:
+                board[i][j] = "▩"
+    # board[5][4] = '💰'
+    display_board(board)
     return board
     
 
