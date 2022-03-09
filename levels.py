@@ -3,6 +3,7 @@ from time import sleep
 from engine import create_board
 from ui import display_board
 from util import clear_screen
+import gameitems
 
 
 def create_level_one(width, height):
@@ -100,16 +101,16 @@ def create_level_one(width, height):
             if j == 27 and i >= 14 and i < 18:
                 board[i][j] = "▩"
             
-    board[5][9] = '€'
-    board[9][23] = '€'
-    board[18][1] = '€'
-    board[3][26] ='➹'
-    board[8][18] ='☢'
-    board[15][24] ='☢'
-    board[7][3] ='☢'
-    board[15][13] ='☢'
-    board[1][1] = '❤'
-    board[7][23] = '❤'
+    board[5][9] = gameitems.coin_item['icon']
+    board[9][23] = gameitems.coin_item['icon']
+    board[18][1] = gameitems.coin_item['icon']
+    board[3][26] = gameitems.knife_item['icon']
+    board[8][18] = gameitems.bomb_item['icon']
+    board[15][24] = gameitems.bomb_item['icon']
+    board[7][3] = gameitems.bomb_item['icon']
+    board[15][13] = gameitems.bomb_item['icon']
+    board[1][1] = gameitems.food_item['icon']
+    board[7][23] = gameitems.food_item['icon']
     display_board(board)
     return board
     
