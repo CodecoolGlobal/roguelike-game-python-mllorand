@@ -1,5 +1,6 @@
 import gameitems
 
+
 def create_board(width, height):
     '''
     Creates a new game board based on input parameters.
@@ -30,21 +31,25 @@ def put_player_on_board(board, player):
     y = player['coord'][1]
     icon = player['icon']
     board[x][y] = icon
-    
-    
+
+
 def item_check(move, board, player):
     for item in gameitems.items:
         if item['icon'] == board[move['coord'][0]][move['coord'][1]]:
             if item['type'] == 'consumable':
-                event={'hp': player['hp']+item['effect']}
+                event = {'hp': player['hp']+item['effect']}
                 player.update(event)
             if item['type'] == 'collectible':
                 if item['name'] in player['inventory']:
                     player['inventory'][item['name']] += 1
                 else:
                     player['inventory'].setdefault(item['name'], 1)
-    
-    
+
+
+def put_enemies_on_board(board):
+    board[3][4] = '𓆗'
+
+
 def move(board, player, key):
     board[player['coord'][0]][player['coord'][1]] = " "
     move = {'coord': (player['coord'][0], player['coord'][1])}
@@ -63,4 +68,3 @@ def move(board, player, key):
     if board[move['coord'][0]][move['coord'][1]] not in [' ', '▩']:
         item_check(move, board, player)
     player.update(move)
-    

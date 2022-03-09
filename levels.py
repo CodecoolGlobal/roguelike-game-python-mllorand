@@ -1,8 +1,6 @@
 import random
-from time import sleep
 from engine import create_board
 from ui import display_board
-from util import clear_screen
 import gameitems
 
 
@@ -100,7 +98,7 @@ def create_level_one(width, height):
                 board[i][j] = "▩"
             if j == 27 and i >= 14 and i < 18:
                 board[i][j] = "▩"
-            
+
     board[5][9] = gameitems.coin_item['icon']
     board[9][23] = gameitems.coin_item['icon']
     board[18][1] = gameitems.coin_item['icon']
@@ -111,9 +109,11 @@ def create_level_one(width, height):
     board[15][13] = gameitems.bomb_item['icon']
     board[1][1] = gameitems.food_item['icon']
     board[7][23] = gameitems.food_item['icon']
+    #  board[4][3] = gameitems.enemies_item['icon']
+
     display_board(board)
     return board
-    
+
 
 def create_level_two(board):
     pass
@@ -148,8 +148,4 @@ def create_random_level(board, number_of_obstacles, min_size_of_obstacles, max_s
 #     sleep(1)
 #     clear_screen()
 
-
-
-
-
-#create_level_one(width=30, height=20)
+# create_level_one(width=30, height=20)
