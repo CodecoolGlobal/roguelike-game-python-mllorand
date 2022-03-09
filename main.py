@@ -23,22 +23,27 @@ def create_player():
     return {"icon": PLAYER_ICON, "coord": (PLAYER_START_X, PLAYER_START_Y), "inventory": {}, "hp": 100}
 
 
+def create_enemies():
+    return {"icon": '𓆗', "coord": (3, 4)}
+
+
 def main():
     player = create_player()
-    engine.put_enemies_to_board()
+    enemies = create_enemies()
     # board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
     board = levels.create_level_one(BOARD_WIDTH, BOARD_HEIGHT)
     util.clear_screen()
     is_running = True
     while is_running:
         engine.put_player_on_board(board, player)
-        engine.put_enemies_on_board(board)
+        engine.put_enemies_on_board(board, enemies)
         ui.display_board(board)
         key = util.key_pressed()
         if key == 'q':
             is_running = False
         if key in ['w', 's', 'a', 'd']:
             engine.move(board, player, key)
+            engine.move_enemies(board, enemies)
         if key == 'i':
             print('Backpack:', player['inventory'], "\nHP:", player['hp'])
             sleep(2)

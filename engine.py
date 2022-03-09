@@ -1,3 +1,4 @@
+import random
 import gameitems
 
 
@@ -46,8 +47,30 @@ def item_check(move, board, player):
                     player['inventory'].setdefault(item['name'], 1)
 
 
-def put_enemies_on_board(board):
-    board[3][4] = '𓆗'
+def put_enemies_on_board(board, enemies):
+    x = enemies['coord'][0]
+    y = enemies['coord'][1]
+    icon = enemies['icon']
+    board[x][y] = icon
+
+
+def move_enemies(board, enemies):
+    keys = ['d', 'a', 'w', 's']
+    key = random.choice(keys)
+    move = {'coord': (enemies['coord'][0], enemies['coord'][1])}
+    if key == 'd':
+        if board[enemies['coord'][0]][enemies['coord'][1] + 1] != '▩':
+            move = {'coord': (enemies['coord'][0], enemies['coord'][1] + 1)}
+    if key == 'a':
+        if board[enemies['coord'][0]][enemies['coord'][1] - 1] != '▩':
+            move = {'coord': (enemies['coord'][0], enemies['coord'][1] - 1)}
+    if key == 'w':
+        if board[enemies['coord'][0] - 1][enemies['coord'][1]] != '▩':
+            move = {'coord': (enemies['coord'][0] - 1, enemies['coord'][1])}
+    if key == 's':
+        if board[enemies['coord'][0] + 1][enemies['coord'][1]] != '▩':
+            move = {'coord': (enemies['coord'][0] + 1, enemies['coord'][1])}
+    enemies.update(move)
 
 
 def move(board, player, key):
