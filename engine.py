@@ -57,6 +57,7 @@ def put_enemies_on_board(board, enemies):
 def move_enemies(board, enemies):
     keys = ['d', 'a', 'w', 's']
     key = random.choice(keys)
+    board[enemies['coord'][0]][enemies['coord'][1]] = " "
     move = {'coord': (enemies['coord'][0], enemies['coord'][1])}
     if key == 'd':
         if board[enemies['coord'][0]][enemies['coord'][1] + 1] != '▩':

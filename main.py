@@ -42,8 +42,8 @@ def main():
         if key == 'q':
             is_running = False
         if key in ['w', 's', 'a', 'd']:
-            engine.move(board, player, key)
             engine.move_enemies(board, enemies)
+            engine.move(board, player, key)
         if key == 'i':
             print('Backpack:', player['inventory'], "\nHP:", player['hp'])
             sleep(2)
