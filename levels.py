@@ -154,12 +154,7 @@ def create_random_level(board, number_of_obstacles, min_size_of_obstacles, max_s
 
 
 def validate_board(board, player_position, coordinates_of_items):
-    reachable_coordinates = set()
-    player_neighbours = get_neighbour_coordinates(player_position)
-    for coordinate in player_neighbours:
-        row, column = coordinate
-        if board[row][column] not in ("▩", Fore.BLUE + "▩"):
-            reachable_coordinates.add(coordinate)
+    reachable_coordinates = {player_position}
     found_all_reachables = False
     while not found_all_reachables:
         temp = set()
