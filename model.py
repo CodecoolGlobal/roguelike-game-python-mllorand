@@ -1,27 +1,34 @@
 from colorama import Fore, Style
 import random
 
-PLAYER_STARTING_COORDINATE = 10, 15
+BOARD_WIDTH = 30
+BOARD_HEIGHT = 20
+
+PLAYER_STARTING_COORDINATE = BOARD_HEIGHT // 2, BOARD_WIDTH // 2
 
 WALL_ICON = Fore.BLUE + "▩" + Style.RESET_ALL
 BOARD_ICON = ' '
 PLAYER_ICON = 'P'
-ENEMY_ICON = Fore.CYAN + 'E' + Style.RESET_ALL
+ENEMY_ICON_1 = Fore.CYAN + 'E' + Style.RESET_ALL
+ENEMY_ICON_2 = Fore.CYAN + 'V' + Style.RESET_ALL
+ENEMY_ICON_3 = Fore.CYAN + 'I' + Style.RESET_ALL
+ENEMY_ICON_4 = Fore.CYAN + 'L' + Style.RESET_ALL
 BOMB_ICON = Fore.YELLOW + '☢' + Style.RESET_ALL
 FOOD_ICON = Fore.RED + '❤' + Style.RESET_ALL
 COIN_ICON = Fore.GREEN + '€' + Style.RESET_ALL
-KNIFE_ICON = Fore.BLUE + '➹' + Style.RESET_ALL
 GATE_ICON = 'O'
 
 BOMB_ITEM = {'name': 'bomb', 'type': 'consumable', 'icon': BOMB_ICON, 'effect': -25}
 FOOD_ITEM = {'name': 'food', 'type': 'consumable', 'icon': FOOD_ICON, 'effect': 25}
 COIN_ITEM = {'name': 'coin', 'type': 'collectible', 'icon': COIN_ICON}
-KNIFE_ITEM = {'name': 'knife', 'type': 'collectible', 'icon': KNIFE_ICON}
-ENEMIES_ITEM = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON, 'effect': -25}
+ENEMIES_ITEM_1 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_1, 'effect': -100}
+ENEMIES_ITEM_2 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_2, 'effect': -100}
+ENEMIES_ITEM_3 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_3, 'effect': -100}
+ENEMIES_ITEM_4 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_4, 'effect': -100}
 PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON, 'coord': PLAYER_STARTING_COORDINATE, 'inventory': {}, 'hp': 100}
 GATE_ITEM = {'name': 'gate', 'type': 'collectible', 'icon': GATE_ICON}
 
-ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, KNIFE_ITEM, ENEMIES_ITEM, GATE_ITEM]
+ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, ENEMIES_ITEM_1, ENEMIES_ITEM_2, ENEMIES_ITEM_3, ENEMIES_ITEM_4, GATE_ITEM]
 
 
 def create_board(width, height):
@@ -79,16 +86,16 @@ def move_enemies(board, enemies):
     board[enemies['coord'][0]][enemies['coord'][1]] = " "
     move = {'coord': (enemies['coord'][0], enemies['coord'][1])}
     if key == 'd':
-        if board[enemies['coord'][0]][enemies['coord'][1] + 1] not in (WALL_ICON, GATE_ICON):
+        if board[enemies['coord'][0]][enemies['coord'][1] + 1] not in (WALL_ICON, GATE_ICON, COIN_ICON):
             move = {'coord': (enemies['coord'][0], enemies['coord'][1] + 1)}
     if key == 'a':
-        if board[enemies['coord'][0]][enemies['coord'][1] - 1] not in (WALL_ICON, GATE_ICON):
+        if board[enemies['coord'][0]][enemies['coord'][1] - 1] not in (WALL_ICON, GATE_ICON, COIN_ICON):
             move = {'coord': (enemies['coord'][0], enemies['coord'][1] - 1)}
     if key == 'w':
-        if board[enemies['coord'][0] - 1][enemies['coord'][1]] not in (WALL_ICON, GATE_ICON):
+        if board[enemies['coord'][0] - 1][enemies['coord'][1]] not in (WALL_ICON, GATE_ICON, COIN_ICON):
             move = {'coord': (enemies['coord'][0] - 1, enemies['coord'][1])}
     if key == 's':
-        if board[enemies['coord'][0] + 1][enemies['coord'][1]] not in (WALL_ICON, GATE_ICON):
+        if board[enemies['coord'][0] + 1][enemies['coord'][1]] not in (WALL_ICON, GATE_ICON, COIN_ICON):
             move = {'coord': (enemies['coord'][0] + 1, enemies['coord'][1])}
     enemies.update(move)
 
@@ -131,8 +138,8 @@ def move(board, player, key):
 
 def create_obstacles(board, wall_length, direction):
     while True:
-        column = random.randint(1, 29)
-        row = random.randint(1, 19)
+        column = random.randint(1, BOARD_WIDTH-1)
+        row = random.randint(1, BOARD_HEIGHT-1)
         try:
             if direction == 'horizontal':
                 for i in range(column, column + wall_length):
@@ -152,9 +159,9 @@ def create_random_map(board, number_of_obstacles, player_starting_coordinates, m
         create_obstacles(board, random.randint(min_size_of_obstacles, max_size_of_obstacles), random.choice(['vertical', 'horizontal']))
     board[player_starting_coordinates[0]][player_starting_coordinates[1]] = PLAYER_ICON
     for item in ITEMS:
-        row, column = random.randint(1, 18), random.randint(1, 28)
+        row, column = random.randint(1, BOARD_HEIGHT-2), random.randint(1, BOARD_WIDTH-2)
         while board[row][column] != ' ':
-            row, column = random.randint(1, 18), random.randint(1, 28)
+            row, column = random.randint(1, BOARD_HEIGHT-2), random.randint(1, BOARD_WIDTH-2)
         board[row][column] = item['icon']
         coordinates_of_items.add((row, column))
 
