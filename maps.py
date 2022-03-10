@@ -141,7 +141,7 @@ def create_obstacles(board, wall_length, direction):
             continue
 
 
-def create_random_level(board, number_of_obstacles, min_size_of_obstacles, max_size_of_obstacles):
+def create_random_map(board, number_of_obstacles, min_size_of_obstacles, max_size_of_obstacles):
     coordinates_of_items = set()
     for _ in range(number_of_obstacles):
         create_obstacles(board, random.randint(min_size_of_obstacles, max_size_of_obstacles), random.choice(['vertical', 'horizontal']))
@@ -156,20 +156,22 @@ def create_random_level(board, number_of_obstacles, min_size_of_obstacles, max_s
 
 def validate_board(board, player_position, coordinates_of_items):
     reachable_coordinates = {player_position}
+    already_checked_cooridnates = set()
     found_all_reachables = False
     while not found_all_reachables:
-        temp = set()
+        new_reachable_coordinates = set()
         old_length_of_reachables = len(reachable_coordinates)
-        for coordinate in reachable_coordinates:
-            reachables_neighbours = get_neighbour_coordinates(coordinate)
-            for neighbour in reachables_neighbours:
+        for coordinate in reachable_coordinates.difference(already_checked_cooridnates):
+            neighbours = get_neighbour_coordinates(coordinate)
+            already_checked_cooridnates.add(coordinate)
+            for neighbour in neighbours:
                 row, column = neighbour
                 try:
-                    if board[row][column] not in (icons.wall_icon):
-                        temp.add(neighbour)
+                    if board[row][column] != icons.wall_icon:
+                        new_reachable_coordinates.add(neighbour)
                 except IndexError:
                     continue
-        reachable_coordinates.update(temp)
+        reachable_coordinates.update(new_reachable_coordinates)
         new_length_of_reachables = len(reachable_coordinates)
         if new_length_of_reachables == old_length_of_reachables:
             found_all_reachables = True
@@ -184,12 +186,13 @@ def get_neighbour_coordinates(coordinate):
     return [(row, col - 1), (row, col + 1), (row - 1, col), (row + 1, col)]
 
 
-# while True:
-#     board = create_board(30, 20)
-#     items_coordinates = create_random_level(board, 100, 1, 5)
-#     is_valid_board = validate_board(board, (2, 2), items_coordinates)
-#     display_board(board)
-#     if is_valid_board:
-#         break
-#     sleep(1)
-#     clear_screen()
+if __name__ == '__main__':
+    while True:
+        board = create_board(30, 20)
+        items_coordinates = create_random_map(board, 120, 1, 5)
+        is_valid_board = validate_board(board, (2, 2), items_coordinates)
+        display_board(board)
+        if is_valid_board:
+            break
+        sleep(1)
+        clear_screen()

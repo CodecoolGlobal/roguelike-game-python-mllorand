@@ -2,7 +2,7 @@ from time import sleep
 import util
 import engine
 import ui
-import levels
+import maps
 
 PLAYER_ICON = '𓃱'
 PLAYER_START_X = 3
@@ -31,7 +31,7 @@ def main():
     player = create_player()
     enemies = create_enemies()
     # board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
-    board = levels.create_level_one(BOARD_WIDTH, BOARD_HEIGHT)
+    board = maps.create_level_one(BOARD_WIDTH, BOARD_HEIGHT)
     util.clear_screen()
     is_running = True
     while is_running:
