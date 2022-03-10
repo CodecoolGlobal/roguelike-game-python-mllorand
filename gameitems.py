@@ -1,6 +1,4 @@
-import colorama
 from colorama import Fore, Back, Style
-colorama.init(autoreset=True)
 
 wall_icon = Fore.BLUE + "▩" + Style.RESET_ALL
 board_icon = ' '
