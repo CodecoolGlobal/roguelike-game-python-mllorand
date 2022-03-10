@@ -2,9 +2,9 @@ from time import sleep
 import util
 import engine
 import ui
-import maps
+import levels
+import icons
 
-PLAYER_ICON = '𓃱'
 PLAYER_START_X = 3
 PLAYER_START_Y = 3
 
@@ -20,11 +20,11 @@ def create_player():
     Returns:
     dictionary
     '''
-    return {"icon": PLAYER_ICON, "coord": (PLAYER_START_X, PLAYER_START_Y), "inventory": {}, "hp": 100}
+    return {"icon": icons.player_icon, "coord": (PLAYER_START_X, PLAYER_START_Y), "inventory": {}, "hp": 100}
 
 
 def create_enemies():
-    return {"icon": '𓆗', "coord": (3, 4)}
+    return {"icon":icons.enemy_icon, "coord": (3, 4)}
 
 
 def main():
