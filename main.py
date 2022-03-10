@@ -45,7 +45,7 @@ def main():
             engine.move_enemies(board, enemies)
             engine.move(board, player, key)
         if key == 'i':
-            print('Backpack:', player['inventory'], "\nHP:", player['hp'])
+            engine.print_table(player['inventory'])
             sleep(2)
         else:
             pass
