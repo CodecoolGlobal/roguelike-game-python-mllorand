@@ -4,7 +4,8 @@ import random
 BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
 
-PLAYER_STARTING_COORDINATE = BOARD_HEIGHT // 2, BOARD_WIDTH // 2
+#  PLAYER_STARTING_COORDINATE = BOARD_HEIGHT // 2, BOARD_WIDTH // 2   # Use this for start in middle 
+PLAYER_STARTING_COORDINATE = random.randint(1, BOARD_HEIGHT-2), random.randint(1, BOARD_WIDTH-2)  # Use this for start random 
 
 WALL_ICON = Fore.BLUE + "▩" + Style.RESET_ALL
 BOARD_ICON = ' '
@@ -29,6 +30,9 @@ PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON, 'coord':
 GATE_ITEM = {'name': 'gate', 'type': 'collectible', 'icon': GATE_ICON}
 
 ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, ENEMIES_ITEM_1, ENEMIES_ITEM_2, ENEMIES_ITEM_3, ENEMIES_ITEM_4, GATE_ITEM]
+ENEMIES = [ENEMIES_ITEM_1, ENEMIES_ITEM_2, ENEMIES_ITEM_3, ENEMIES_ITEM_4]
+MOVABLE_ITEM = [PLAYER_ITEM, ENEMIES_ITEM_1, ENEMIES_ITEM_2, ENEMIES_ITEM_3, ENEMIES_ITEM_4]
+ENEMY_ICON = [ENEMY_ICON_1, ENEMY_ICON_2, ENEMY_ICON_3, ENEMY_ICON_4]
 
 
 def create_board(width, height):
@@ -53,18 +57,8 @@ def find_in_list_of_list(mylist, char):
     raise ValueError("'{char}' is not in list".format(char=char))
 
 
-def put_player_on_board(board, player):
-    x = player['coord'][0]
-    y = player['coord'][1]
-    icon = player['icon']
-    board[x][y] = icon
-
-
-def put_enemies_on_board(board, enemies):
-    x = enemies['coord'][0]
-    y = enemies['coord'][1]
-    icon = enemies['icon']
-    board[x][y] = icon
+def put_movable_item_on_board(board, movable_item):
+    board[movable_item['coord'][0]][movable_item['coord'][1]] = movable_item['icon']
 
 
 def item_check(move, board, player):
@@ -80,59 +74,43 @@ def item_check(move, board, player):
                     player['inventory'].setdefault(item['name'], 1)
 
 
+def check_direction(key, move, board, charachters, restricted_area):
+    if key == 'd':
+        if board[charachters['coord'][0]][charachters['coord'][1] + 1] not in restricted_area:
+            move = {'coord': (charachters['coord'][0], charachters['coord'][1] + 1)}
+    if key == 'a':
+        if board[charachters['coord'][0]][charachters['coord'][1] - 1] not in restricted_area:
+            move = {'coord': (charachters['coord'][0], charachters['coord'][1] - 1)}
+    if key == 'w':
+        if board[charachters['coord'][0] - 1][charachters['coord'][1]] not in restricted_area:
+            move = {'coord': (charachters['coord'][0] - 1, charachters['coord'][1])}
+    if key == 's':
+        if board[charachters['coord'][0] + 1][charachters['coord'][1]] not in restricted_area:
+            move = {'coord': (charachters['coord'][0] + 1, charachters['coord'][1])}
+    return move
+
+
 def move_enemies(board, enemies):
     keys = ['d', 'a', 'w', 's']
+    restricted_area = (WALL_ICON, GATE_ICON, COIN_ICON)
     key = random.choice(keys)
     board[enemies['coord'][0]][enemies['coord'][1]] = " "
     move = {'coord': (enemies['coord'][0], enemies['coord'][1])}
-    if key == 'd':
-        if board[enemies['coord'][0]][enemies['coord'][1] + 1] not in (WALL_ICON, GATE_ICON, COIN_ICON):
-            move = {'coord': (enemies['coord'][0], enemies['coord'][1] + 1)}
-    if key == 'a':
-        if board[enemies['coord'][0]][enemies['coord'][1] - 1] not in (WALL_ICON, GATE_ICON, COIN_ICON):
-            move = {'coord': (enemies['coord'][0], enemies['coord'][1] - 1)}
-    if key == 'w':
-        if board[enemies['coord'][0] - 1][enemies['coord'][1]] not in (WALL_ICON, GATE_ICON, COIN_ICON):
-            move = {'coord': (enemies['coord'][0] - 1, enemies['coord'][1])}
-    if key == 's':
-        if board[enemies['coord'][0] + 1][enemies['coord'][1]] not in (WALL_ICON, GATE_ICON, COIN_ICON):
-            move = {'coord': (enemies['coord'][0] + 1, enemies['coord'][1])}
+    move = check_direction(key, move, board, enemies, restricted_area)
     enemies.update(move)
 
 
-def move(board, player, key):
+def move_player(board, player, key):
     board[player['coord'][0]][player['coord'][1]] = " "
     move = {'coord': (player['coord'][0], player['coord'][1])}
     if 'coin' in player['inventory']:
-        if key == 'd':
-            if board[player['coord'][0]][player['coord'][1] + 1] != WALL_ICON:
-                move = {'coord': (player['coord'][0], player['coord'][1] + 1)}
-        if key == 'a':
-            if board[player['coord'][0]][player['coord'][1] - 1] != WALL_ICON:
-                move = {'coord': (player['coord'][0], player['coord'][1] - 1)}
-        if key == 'w':
-            if board[player['coord'][0] - 1][player['coord'][1]] != WALL_ICON:
-                move = {'coord': (player['coord'][0] - 1, player['coord'][1])}
-        if key == 's':
-            if board[player['coord'][0] + 1][player['coord'][1]] != WALL_ICON:
-                move = {'coord': (player['coord'][0] + 1, player['coord'][1])}
-        if board[move['coord'][0]][move['coord'][1]] not in [' ', WALL_ICON]:
-            item_check(move, board, player)
+        restricted_area = (WALL_ICON)
+        move = check_direction(key, move, board, player, restricted_area)
+        item_check(move, board, player)
     else:
-        if key == 'd':
-            if board[player['coord'][0]][player['coord'][1] + 1] not in (WALL_ICON, GATE_ICON):
-                move = {'coord': (player['coord'][0], player['coord'][1] + 1)}
-        if key == 'a':
-            if board[player['coord'][0]][player['coord'][1] - 1] not in (WALL_ICON, GATE_ICON):
-                move = {'coord': (player['coord'][0], player['coord'][1] - 1)}
-        if key == 'w':
-            if board[player['coord'][0] - 1][player['coord'][1]] not in (WALL_ICON, GATE_ICON):
-                move = {'coord': (player['coord'][0] - 1, player['coord'][1])}
-        if key == 's':
-            if board[player['coord'][0] + 1][player['coord'][1]] not in (WALL_ICON, GATE_ICON):
-                move = {'coord': (player['coord'][0] + 1, player['coord'][1])}
-        if board[move['coord'][0]][move['coord'][1]] not in [' ', WALL_ICON]:
-            item_check(move, board, player)
+        restricted_area = ((WALL_ICON, GATE_ICON))
+        move = check_direction(key, move, board, player, restricted_area)
+        item_check(move, board, player)
     player.update(move)
 
 

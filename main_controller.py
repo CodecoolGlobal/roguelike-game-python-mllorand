@@ -24,32 +24,15 @@ def main():
             if key == 'q':
                 exit(1)
             if key in ['w', 's', 'a', 'd']:
-                model.move(board, model.PLAYER_ITEM, key)
-                model.move_enemies(board, model.ENEMIES_ITEM_1)
-                model.move_enemies(board, model.ENEMIES_ITEM_2)
-                model.move_enemies(board, model.ENEMIES_ITEM_3)
-                model.move_enemies(board, model.ENEMIES_ITEM_4)
-                if model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_1['coord'] or model.PLAYER_ITEM['hp'] <= 0:
+                model.move_player(board, model.PLAYER_ITEM, key)
+                for enemy in model.ENEMIES:
+                    model.move_enemies(board, enemy)
+                for movable_items in model.MOVABLE_ITEM:
+                    model.put_movable_item_on_board(board, movable_items)
+                if model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_1['coord'] or model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_2['coord'] or model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_3['coord'] or model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_4['coord'] or model.PLAYER_ITEM['hp'] <= 0:
                     print(f"You're dead now... you've made it to level {level}!")
                     sleep(3)
                     exit(1)
-                if model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_2['coord'] or model.PLAYER_ITEM['hp'] <= 0:
-                    print(f"You're dead now... you've made it to level {level}!")
-                    sleep(3)
-                    exit(1)
-                if model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_3['coord'] or model.PLAYER_ITEM['hp'] <= 0:
-                    print(f"You're dead now... you've made it to level {level}!")
-                    sleep(3)
-                    exit(1)
-                if model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_4['coord'] or model.PLAYER_ITEM['hp'] <= 0:
-                    print(f"You're dead now... you've made it to level {level}!")
-                    sleep(3)
-                    exit(1)
-                model.put_player_on_board(board, model.PLAYER_ITEM)
-                model.put_enemies_on_board(board, model.ENEMIES_ITEM_1)
-                model.put_enemies_on_board(board, model.ENEMIES_ITEM_2)
-                model.put_enemies_on_board(board, model.ENEMIES_ITEM_3)
-                model.put_enemies_on_board(board, model.ENEMIES_ITEM_4)
             if key == 'i':
                 print(model.PLAYER_ITEM['inventory'], "\nHP: ", model.PLAYER_ITEM['hp'], "\nLEVEL: ", level)
                 sleep(2)
