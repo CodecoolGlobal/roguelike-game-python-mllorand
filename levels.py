@@ -7,101 +7,102 @@ from time import sleep
 from util import clear_screen
 from colorama import Fore, Back, Style
 colorama.init(autoreset=True)
+import icons
 
 def create_level_one(width, height):
     board = create_board(width=30, height=20)
     for i in range(height):
         for j in range(width):
             if i == 8 and j >= 6 and j < 16:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 11 and j >= 1 and j < 18:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 6 and i >= 2 and i < 9:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 2 and j >= 6 and j < 16:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 15 and i >= 4 and i < 9:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 4 and j >= 8 and j < 15:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 8 and i >= 5 and i < 7:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 6 and j >= 8 and j < 14:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 25 and i >= 2 and i < 5:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 4 and j >= 26 and j < 28:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 22 and i >= 2 and i < 14:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 8 and j >= 23 and j < 29:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 10 and j >= 23 and j < 28:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 12 and j >= 24 and j < 29:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 14 and j >= 22 and j < 28:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 26 and i >= 4 and i < 7:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 5 and j >= 1 and j < 3:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 5 and j >= 4 and j < 6:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 6 and j >= 17 and j < 18:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 7 and j >= 16 and j < 17:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 5 and j >= 18 and j < 19:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 7 and j >= 19 and j < 20:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 8 and j >= 20 and j < 21:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 9 and j >= 21 and j < 22:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 2 and i >= 13 and i < 19:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 6 and i >= 13 and i < 19:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 10 and i >= 13 and i < 19:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 4 and i >= 12 and i < 18:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 8 and i >= 12 and i < 18:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 12 and i >= 12 and i < 18:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 14 and i >= 13 and i < 18:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 16 and i >= 12 and i < 15:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 16 and i >= 16 and i < 19:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 3 and j >= 19 and j < 20:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 4 and j >= 20 and j < 21:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 5 and j >= 21 and j < 22:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 16 and j >= 17 and j < 18:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if i == 16 and j >= 19 and j < 22:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 22 and i >= 14 and i < 17:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 19 and i >= 17 and i < 18:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 21 and i >= 18 and i < 19:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 23 and i >= 14 and i < 18:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 25 and i >= 14 and i < 16:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 25 and i >= 17 and i < 19:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
             if j == 27 and i >= 14 and i < 18:
-                board[i][j] = "▩"
+                board[i][j] = icons.wall_icon
 
     board[5][9] = gameitems.coin_item['icon']
     board[9][23] = gameitems.coin_item['icon']
@@ -130,11 +131,11 @@ def create_obstacles(board, wall_length, direction):
         try:
             if direction == 'horizontal':
                 for i in range(column, column + wall_length):
-                    board[row][i] = "▩"
+                    board[row][i] = icons.wall_icon
                 break
             elif direction == 'vertical':
                 for i in range(row, row + wall_length):
-                    board[i][column] = "▩"
+                    board[i][column] = icons.wall_icon
                 break
         except IndexError:
             continue
@@ -164,7 +165,7 @@ def validate_board(board, player_position, coordinates_of_items):
             for neighbour in reachables_neighbours:
                 row, column = neighbour
                 try:
-                    if board[row][column] not in ("▩", Fore.BLUE + "▩"):
+                    if board[row][column] not in (icons.wall_icon):
                         temp.add(neighbour)
                 except IndexError:
                     continue
