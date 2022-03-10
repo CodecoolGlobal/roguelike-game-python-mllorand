@@ -17,7 +17,7 @@ FOOD_ITEM = {'name': 'food', 'type': 'consumable', 'icon': FOOD_ICON, 'effect': 
 COIN_ITEM = {'name': 'coin', 'type': 'collectible', 'icon': COIN_ICON}
 KNIFE_ITEM = {'name': 'knife', 'type': 'collectible', 'icon': KNIFE_ICON}
 ENEMIES_ITEM = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON, 'effect': -25}
-PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON, 'coord': PLAYER_STARTING_COORDINATE}
+PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON, 'coord': PLAYER_STARTING_COORDINATE, 'inventory': {}, 'hp': 100}
 
 ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, KNIFE_ITEM, ENEMIES_ITEM]
 
@@ -35,6 +35,13 @@ def create_board(width, height):
         left_right[0] = WALL_ICON
         left_right[-1] = WALL_ICON
     return board
+
+
+def find_in_list_of_list(mylist, char):
+    for sub_list in mylist:
+        if char in sub_list:
+            return (mylist.index(sub_list), sub_list.index(char))
+    raise ValueError("'{char}' is not in list".format(char=char))
 
 
 def put_player_on_board(board, player):
