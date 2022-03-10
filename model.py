@@ -182,9 +182,6 @@ def create_valid_random_map(board, player_coordinates, number_of_obstacles, min_
     while True:
         items_coordinates = create_random_map(board, number_of_obstacles, player_coordinates, min_length_of_obstacles, max_length_of_obstacles)
         is_valid_board = validate_board(board, player_coordinates, items_coordinates)
+        print(board)
         if is_valid_board:
             break
-
-
-def create_enemies():
-    return {"icon": ENEMY_ICON, "coord": (3, 4)}
