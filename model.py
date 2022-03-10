@@ -17,7 +17,7 @@ KNIFE_ITEM = {'name': 'knife', 'type': 'collectible', 'icon': KNIFE_ICON}
 ENEMIES_ITEM = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON, 'effect': -25}
 PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON}
 
-ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, KNIFE_ITEM, ENEMIES_ITEM, PLAYER_ITEM]
+ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, KNIFE_ITEM, ENEMIES_ITEM]
 
 
 def create_board(width, height):
@@ -119,16 +119,18 @@ def create_obstacles(board, wall_length, direction):
             continue
 
 
-def create_random_map(board, number_of_obstacles, min_size_of_obstacles, max_size_of_obstacles):
+def create_random_map(board, number_of_obstacles, player_starting_coordinates, min_size_of_obstacles, max_size_of_obstacles):
     coordinates_of_items = set()
     for _ in range(number_of_obstacles):
         create_obstacles(board, random.randint(min_size_of_obstacles, max_size_of_obstacles), random.choice(['vertical', 'horizontal']))
+    board[player_starting_coordinates[0]][player_starting_coordinates[1]] = PLAYER_ICON
     for item in ITEMS:
         row, column = random.randint(1, 18), random.randint(1, 28)
         while board[row][column] != ' ':
             row, column = random.randint(1, 18), random.randint(1, 28)
         board[row][column] = item['icon']
         coordinates_of_items.add((row, column))
+
     return coordinates_of_items
 
 
@@ -166,7 +168,7 @@ def get_neighbour_coordinates(coordinate):
 
 def create_valid_random_map(board, player_coordinates, number_of_obstacles, min_length_of_obstacles, max_length_of_obstacles):
     while True:
-        items_coordinates = create_random_map(board, number_of_obstacles, min_length_of_obstacles, max_length_of_obstacles)
+        items_coordinates = create_random_map(board, number_of_obstacles, player_coordinates, min_length_of_obstacles, max_length_of_obstacles)
         is_valid_board = validate_board(board, player_coordinates, items_coordinates)
         if is_valid_board:
             break
