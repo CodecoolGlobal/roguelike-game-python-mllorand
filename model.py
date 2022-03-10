@@ -4,8 +4,8 @@ import random
 BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
 
-#  PLAYER_STARTING_COORDINATE = BOARD_HEIGHT // 2, BOARD_WIDTH // 2   # Use this for start in middle 
-PLAYER_STARTING_COORDINATE = random.randint(1, BOARD_HEIGHT-2), random.randint(1, BOARD_WIDTH-2)  # Use this for start random 
+#  PLAYER_STARTING_COORDINATE = BOARD_HEIGHT // 2, BOARD_WIDTH // 2   # Use this for start in middle
+PLAYER_STARTING_COORDINATE = random.randint(1, BOARD_HEIGHT-2), random.randint(1, BOARD_WIDTH-2)  # Use this for start random
 
 WALL_ICON = Fore.BLUE + "▩" + Style.RESET_ALL
 BOARD_ICON = ' '
@@ -32,7 +32,14 @@ GATE_ITEM = {'name': 'gate', 'type': 'collectible', 'icon': GATE_ICON}
 ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, ENEMIES_ITEM_1, ENEMIES_ITEM_2, ENEMIES_ITEM_3, ENEMIES_ITEM_4, GATE_ITEM]
 ENEMIES = [ENEMIES_ITEM_1, ENEMIES_ITEM_2, ENEMIES_ITEM_3, ENEMIES_ITEM_4]
 MOVABLE_ITEM = [PLAYER_ITEM, ENEMIES_ITEM_1, ENEMIES_ITEM_2, ENEMIES_ITEM_3, ENEMIES_ITEM_4]
-ENEMY_ICON = [ENEMY_ICON_1, ENEMY_ICON_2, ENEMY_ICON_3, ENEMY_ICON_4]
+
+
+def check_icons(board):
+    ENEMIES_ITEM_1['coord'] = find_in_list_of_list(board, ENEMY_ICON_1)
+    ENEMIES_ITEM_2['coord'] = find_in_list_of_list(board, ENEMY_ICON_2)
+    ENEMIES_ITEM_3['coord'] = find_in_list_of_list(board, ENEMY_ICON_3)
+    ENEMIES_ITEM_4['coord'] = find_in_list_of_list(board, ENEMY_ICON_4)
+    PLAYER_ITEM['coord'] = find_in_list_of_list(board, PLAYER_ICON)
 
 
 def create_board(width, height):
@@ -182,6 +189,6 @@ def create_valid_random_map(board, player_coordinates, number_of_obstacles, min_
     while True:
         items_coordinates = create_random_map(board, number_of_obstacles, player_coordinates, min_length_of_obstacles, max_length_of_obstacles)
         is_valid_board = validate_board(board, player_coordinates, items_coordinates)
-        print(board)
+        # print(board)
         if is_valid_board:
             break
