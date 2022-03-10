@@ -166,13 +166,8 @@ def validate_board(board, player_position, coordinates_of_items):
             for neighbour in neighbours:
                 row, column = neighbour
                 try:
-<<<<<<< HEAD:maps.py
-                    if board[row][column] != icons.wall_icon:
+                    if board[row][column] != gameitems.wall_icon:
                         new_reachable_coordinates.add(neighbour)
-=======
-                    if board[row][column] not in (gameitems.wall_icon):
-                        temp.add(neighbour)
->>>>>>> cffa4e8a920c8f33553d5fa189f426c16e7c2b89:levels.py
                 except IndexError:
                     continue
         reachable_coordinates.update(new_reachable_coordinates)
@@ -190,13 +185,22 @@ def get_neighbour_coordinates(coordinate):
     return [(row, col - 1), (row, col + 1), (row - 1, col), (row + 1, col)]
 
 
-if __name__ == '__main__':
+def create_valid_random_map(board, player_coordinates, number_of_obstacles, min_length_of_obstacles, max_length_of_obstacles)
     while True:
-        board = create_board(30, 20)
-        items_coordinates = create_random_map(board, 120, 1, 5)
-        is_valid_board = validate_board(board, (2, 2), items_coordinates)
+        items_coordinates = create_random_map(board, number_of_obstacles, min_length_of_obstacles, max_length_of_obstacles)
+        is_valid_board = validate_board(board, player_coordinates, items_coordinates)
         display_board(board)
         if is_valid_board:
             break
-        sleep(1)
-        clear_screen()
+
+
+if __name__ == '__main__':
+    while True:
+            board = create_board(30, 20)
+            items_coordinates = create_random_map(board, 20, 5, 15)
+            is_valid_board = validate_board(board, (2, 2), items_coordinates)
+            display_board(board)
+            if is_valid_board:
+                break
+            sleep(1)
+            clear_screen()
