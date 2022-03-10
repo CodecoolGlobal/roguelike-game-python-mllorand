@@ -26,6 +26,8 @@ def main():
                 for movable_items in model.MOVABLE_ITEM:
                     model.put_movable_item_on_board(board, movable_items)
                 if model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_1['coord'] or model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_2['coord'] or model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_3['coord'] or model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_4['coord'] or model.PLAYER_ITEM['hp'] <= 0:
+                    util.clear_screen()
+                    view.display_board(board)
                     print(f"You're dead now... you've made it to level {level}!")
                     sleep(3)
                     exit(1)
