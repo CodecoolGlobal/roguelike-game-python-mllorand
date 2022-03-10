@@ -2,7 +2,7 @@ from time import sleep
 import util
 import engine
 import ui
-import levels
+import maps
 import gameitems
 
 PLAYER_START_X = 3

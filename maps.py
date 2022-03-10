@@ -166,13 +166,8 @@ def validate_board(board, player_position, coordinates_of_items):
             for neighbour in neighbours:
                 row, column = neighbour
                 try:
-<<<<<<< HEAD:maps.py
-                    if board[row][column] != icons.wall_icon:
-                        new_reachable_coordinates.add(neighbour)
-=======
                     if board[row][column] not in (gameitems.wall_icon):
                         temp.add(neighbour)
->>>>>>> cffa4e8a920c8f33553d5fa189f426c16e7c2b89:levels.py
                 except IndexError:
                     continue
         reachable_coordinates.update(new_reachable_coordinates)
