@@ -18,6 +18,7 @@ def main():
             view.display_board(board)
             key = util.key_pressed()
             if key == 'q':
+                # view.display_authors(view.AUTHORS)
                 exit(1)
             if key in ['w', 's', 'a', 'd']:
                 model.move_player(board, model.PLAYER_ITEM, key)
