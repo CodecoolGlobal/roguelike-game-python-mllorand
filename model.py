@@ -11,6 +11,7 @@ BOMB_ICON = Fore.YELLOW + '☢' + Style.RESET_ALL
 FOOD_ICON = Fore.RED + '❤' + Style.RESET_ALL
 COIN_ICON = Fore.GREEN + '€' + Style.RESET_ALL
 KNIFE_ICON = Fore.BLUE + '➹' + Style.RESET_ALL
+GATE_ICON = 'O'
 
 BOMB_ITEM = {'name': 'bomb', 'type': 'consumable', 'icon': BOMB_ICON, 'effect': -25}
 FOOD_ITEM = {'name': 'food', 'type': 'consumable', 'icon': FOOD_ICON, 'effect': 25}
@@ -18,8 +19,9 @@ COIN_ITEM = {'name': 'coin', 'type': 'collectible', 'icon': COIN_ICON}
 KNIFE_ITEM = {'name': 'knife', 'type': 'collectible', 'icon': KNIFE_ICON}
 ENEMIES_ITEM = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON, 'effect': -25}
 PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON, 'coord': PLAYER_STARTING_COORDINATE, 'inventory': {}, 'hp': 100}
+GATE_ITEM = {'name': 'gate', 'type': 'collectible', 'icon': GATE_ICON}
 
-ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, KNIFE_ITEM, ENEMIES_ITEM]
+ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, KNIFE_ITEM, ENEMIES_ITEM, GATE_ITEM]
 
 
 def create_board(width, height):
@@ -77,16 +79,16 @@ def move_enemies(board, enemies):
     board[enemies['coord'][0]][enemies['coord'][1]] = " "
     move = {'coord': (enemies['coord'][0], enemies['coord'][1])}
     if key == 'd':
-        if board[enemies['coord'][0]][enemies['coord'][1] + 1] != WALL_ICON:
+        if board[enemies['coord'][0]][enemies['coord'][1] + 1] not in (WALL_ICON, GATE_ICON):
             move = {'coord': (enemies['coord'][0], enemies['coord'][1] + 1)}
     if key == 'a':
-        if board[enemies['coord'][0]][enemies['coord'][1] - 1] != WALL_ICON:
+        if board[enemies['coord'][0]][enemies['coord'][1] - 1] not in (WALL_ICON, GATE_ICON):
             move = {'coord': (enemies['coord'][0], enemies['coord'][1] - 1)}
     if key == 'w':
-        if board[enemies['coord'][0] - 1][enemies['coord'][1]] != WALL_ICON:
+        if board[enemies['coord'][0] - 1][enemies['coord'][1]] not in (WALL_ICON, GATE_ICON):
             move = {'coord': (enemies['coord'][0] - 1, enemies['coord'][1])}
     if key == 's':
-        if board[enemies['coord'][0] + 1][enemies['coord'][1]] != WALL_ICON:
+        if board[enemies['coord'][0] + 1][enemies['coord'][1]] not in (WALL_ICON, GATE_ICON):
             move = {'coord': (enemies['coord'][0] + 1, enemies['coord'][1])}
     enemies.update(move)
 
@@ -94,20 +96,36 @@ def move_enemies(board, enemies):
 def move(board, player, key):
     board[player['coord'][0]][player['coord'][1]] = " "
     move = {'coord': (player['coord'][0], player['coord'][1])}
-    if key == 'd':
-        if board[player['coord'][0]][player['coord'][1] + 1] != WALL_ICON:
-            move = {'coord': (player['coord'][0], player['coord'][1] + 1)}
-    if key == 'a':
-        if board[player['coord'][0]][player['coord'][1] - 1] != WALL_ICON:
-            move = {'coord': (player['coord'][0], player['coord'][1] - 1)}
-    if key == 'w':
-        if board[player['coord'][0] - 1][player['coord'][1]] != WALL_ICON:
-            move = {'coord': (player['coord'][0] - 1, player['coord'][1])}
-    if key == 's':
-        if board[player['coord'][0] + 1][player['coord'][1]] != WALL_ICON:
-            move = {'coord': (player['coord'][0] + 1, player['coord'][1])}
-    if board[move['coord'][0]][move['coord'][1]] not in [' ', WALL_ICON]:
-        item_check(move, board, player)
+    if 'coin' in player['inventory']:
+        if key == 'd':
+            if board[player['coord'][0]][player['coord'][1] + 1] != WALL_ICON:
+                move = {'coord': (player['coord'][0], player['coord'][1] + 1)}
+        if key == 'a':
+            if board[player['coord'][0]][player['coord'][1] - 1] != WALL_ICON:
+                move = {'coord': (player['coord'][0], player['coord'][1] - 1)}
+        if key == 'w':
+            if board[player['coord'][0] - 1][player['coord'][1]] != WALL_ICON:
+                move = {'coord': (player['coord'][0] - 1, player['coord'][1])}
+        if key == 's':
+            if board[player['coord'][0] + 1][player['coord'][1]] != WALL_ICON:
+                move = {'coord': (player['coord'][0] + 1, player['coord'][1])}
+        if board[move['coord'][0]][move['coord'][1]] not in [' ', WALL_ICON]:
+            item_check(move, board, player)
+    else:
+        if key == 'd':
+            if board[player['coord'][0]][player['coord'][1] + 1] not in (WALL_ICON, GATE_ICON):
+                move = {'coord': (player['coord'][0], player['coord'][1] + 1)}
+        if key == 'a':
+            if board[player['coord'][0]][player['coord'][1] - 1] not in (WALL_ICON, GATE_ICON):
+                move = {'coord': (player['coord'][0], player['coord'][1] - 1)}
+        if key == 'w':
+            if board[player['coord'][0] - 1][player['coord'][1]] not in (WALL_ICON, GATE_ICON):
+                move = {'coord': (player['coord'][0] - 1, player['coord'][1])}
+        if key == 's':
+            if board[player['coord'][0] + 1][player['coord'][1]] not in (WALL_ICON, GATE_ICON):
+                move = {'coord': (player['coord'][0] + 1, player['coord'][1])}
+        if board[move['coord'][0]][move['coord'][1]] not in [' ', WALL_ICON]:
+            item_check(move, board, player)
     player.update(move)
 
 
