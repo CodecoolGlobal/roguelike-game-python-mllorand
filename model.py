@@ -1,4 +1,5 @@
 from colorama import Fore, Style
+import random
 
 WALL_ICON = Fore.BLUE + "▩" + Style.RESET_ALL
 BOARD_ICON = ' '
@@ -14,12 +15,9 @@ FOOD_ITEM = {'name': 'food', 'type': 'consumable', 'icon': FOOD_ICON, 'effect': 
 COIN_ITEM = {'name': 'coin', 'type': 'collectible', 'icon': COIN_ICON}
 KNIFE_ITEM = {'name': 'knife', 'type': 'collectible', 'icon': KNIFE_ICON}
 ENEMIES_ITEM = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON, 'effect': -25}
+PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON}
 
-ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, KNIFE_ITEM, ENEMIES_ITEM]
-
-
-PLAYER_START_X = 3
-PLAYER_START_Y = 3
+ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, KNIFE_ITEM, ENEMIES_ITEM, PLAYER_ITEM]
 
 
 def create_board(width, height):
@@ -170,13 +168,8 @@ def create_valid_random_map(board, player_coordinates, number_of_obstacles, min_
     while True:
         items_coordinates = create_random_map(board, number_of_obstacles, min_length_of_obstacles, max_length_of_obstacles)
         is_valid_board = validate_board(board, player_coordinates, items_coordinates)
-        display_board(board)
         if is_valid_board:
             break
-
-
-def create_player():
-    return {"icon": PLAYER_ICON, "coord": (PLAYER_START_X, PLAYER_START_Y), "inventory": {}, "hp": 100}
 
 
 def create_enemies():
