@@ -29,6 +29,24 @@ def create_board(width, height):
     return board
 
 
+def print_table(inventory, order=None):
+      first_column_width=max((len(max(inventory.keys(),key=len))),9)
+      second_column_width=max(len(str(max(inventory.values()))),5)
+      table_width=max(first_column_width+second_column_width+3,17)
+      print("-"*table_width)
+      print("item name".rjust(first_column_width)+" | "+"count".rjust(second_column_width))
+      print("-"*table_width)
+      if order=="count,asc":
+            for i in sorted(inventory,key=inventory.get):
+                  print(f"{i.rjust(first_column_width)} | {str(inventory.get(i)).rjust(second_column_width)}")
+      elif order=="count,desc":
+            for i in sorted(inventory,key=inventory.get,reverse=True):
+                  print(f"{i.rjust(first_column_width)} | {str(inventory.get(i)).rjust(second_column_width)}")
+      else:
+            for i in inventory:
+                  print(f"{i.rjust(first_column_width)} | {str(inventory.get(i)).rjust(second_column_width)}")
+      print("-"*table_width)
+
 def put_player_on_board(board, player):
     x = player['coord'][0]
     y = player['coord'][1]
