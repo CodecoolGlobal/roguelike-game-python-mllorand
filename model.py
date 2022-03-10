@@ -1,6 +1,8 @@
 from colorama import Fore, Style
 import random
 
+PLAYER_STARTING_COORDINATE = 10, 15
+
 WALL_ICON = Fore.BLUE + "▩" + Style.RESET_ALL
 BOARD_ICON = ' '
 PLAYER_ICON = 'P'
@@ -15,7 +17,7 @@ FOOD_ITEM = {'name': 'food', 'type': 'consumable', 'icon': FOOD_ICON, 'effect': 
 COIN_ITEM = {'name': 'coin', 'type': 'collectible', 'icon': COIN_ICON}
 KNIFE_ITEM = {'name': 'knife', 'type': 'collectible', 'icon': KNIFE_ICON}
 ENEMIES_ITEM = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON, 'effect': -25}
-PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON}
+PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON, 'coord': PLAYER_STARTING_COORDINATE}
 
 ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, KNIFE_ITEM, ENEMIES_ITEM]
 
