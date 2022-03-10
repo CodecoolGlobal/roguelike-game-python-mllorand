@@ -1,5 +1,6 @@
 from colorama import Fore, Style
 import random
+import view
 
 BOARD_WIDTH = 30
 BOARD_HEIGHT = 20
@@ -26,7 +27,7 @@ ENEMIES_ITEM_1 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_1,
 ENEMIES_ITEM_2 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_2, 'effect': -100}
 ENEMIES_ITEM_3 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_3, 'effect': -100}
 ENEMIES_ITEM_4 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_4, 'effect': -100}
-PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON, 'coord': PLAYER_STARTING_COORDINATE, 'inventory': {}, 'hp': 100}
+PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON, 'coord': PLAYER_STARTING_COORDINATE, 'inventory': {}, 'hp': 1000}
 GATE_ITEM = {'name': 'gate', 'type': 'collectible', 'icon': GATE_ICON}
 
 ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, ENEMIES_ITEM_1, ENEMIES_ITEM_2, ENEMIES_ITEM_3, ENEMIES_ITEM_4, GATE_ITEM]
@@ -189,6 +190,6 @@ def create_valid_random_map(board, player_coordinates, number_of_obstacles, min_
     while True:
         items_coordinates = create_random_map(board, number_of_obstacles, player_coordinates, min_length_of_obstacles, max_length_of_obstacles)
         is_valid_board = validate_board(board, player_coordinates, items_coordinates)
-        # print(board)
+        view.display_board(board)
         if is_valid_board:
             break
