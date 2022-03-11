@@ -6,8 +6,8 @@ from time import sleep
 
 def main():
     level = 0
-    difficulty = 8
-    # view.display_intro_screen(board=model.create_board(model.BOARD_WIDTH, model.BOARD_HEIGHT))
+    difficulty = 3
+    view.display_intro_screen(board=model.create_board(model.BOARD_WIDTH, model.BOARD_HEIGHT))
     while True:
         level += 1
         difficulty += 2
@@ -19,7 +19,7 @@ def main():
             view.display_board(board)
             key = util.key_pressed()
             if key == 'q':
-                # view.display_authors(view.AUTHORS)
+                view.display_authors(view.AUTHORS)
                 exit(1)
             if key in ['w', 's', 'a', 'd']:
                 model.move_player(board, model.PLAYER_ITEM, key)
@@ -27,7 +27,7 @@ def main():
                     model.move_enemies(board, enemy)
                 for movable_items in model.MOVABLE_ITEM:
                     model.put_movable_item_on_board(board, movable_items)
-                if model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_1['coord'] and model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_2['coord'] and model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_3['coord'] and model.PLAYER_ITEM['coord'] == model.ENEMIES_ITEM_4['coord'] and model.PLAYER_ITEM['hp'] <= 0:
+                if model.PLAYER_ITEM['hp'] <= 0:
                     util.clear_screen()
                     view.display_board(board)
                     print(f"You're dead now... you've made it to level {level}!")

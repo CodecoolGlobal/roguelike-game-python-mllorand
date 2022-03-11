@@ -20,14 +20,14 @@ FOOD_ICON = Fore.RED + '❤' + Style.RESET_ALL
 COIN_ICON = Fore.GREEN + '€' + Style.RESET_ALL
 GATE_ICON = 'O'
 
-BOMB_ITEM = {'name': 'bomb', 'type': 'consumable', 'icon': BOMB_ICON, 'effect': -25}
-FOOD_ITEM = {'name': 'food', 'type': 'consumable', 'icon': FOOD_ICON, 'effect': 25}
+BOMB_ITEM = {'name': 'bomb', 'type': 'consumable', 'icon': BOMB_ICON, 'effect': -50}
+FOOD_ITEM = {'name': 'food', 'type': 'consumable', 'icon': FOOD_ICON, 'effect': 100}
 COIN_ITEM = {'name': 'coin', 'type': 'collectible', 'icon': COIN_ICON}
 ENEMIES_ITEM_1 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_1, 'effect': -100}
 ENEMIES_ITEM_2 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_2, 'effect': -100}
 ENEMIES_ITEM_3 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_3, 'effect': -100}
 ENEMIES_ITEM_4 = {'name': 'enemies', 'type': 'consumable', 'icon': ENEMY_ICON_4, 'effect': -100}
-PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON, 'coord': PLAYER_STARTING_COORDINATE, 'inventory': {}, 'hp': 1000}
+PLAYER_ITEM = {'name': 'player', 'type': 'player', 'icon': PLAYER_ICON, 'coord': PLAYER_STARTING_COORDINATE, 'inventory': {}, 'hp': 200}
 GATE_ITEM = {'name': 'gate', 'type': 'collectible', 'icon': GATE_ICON}
 
 ITEMS = [BOMB_ITEM, FOOD_ITEM, COIN_ITEM, ENEMIES_ITEM_1, ENEMIES_ITEM_2, ENEMIES_ITEM_3, ENEMIES_ITEM_4, GATE_ITEM]
@@ -191,7 +191,6 @@ def create_valid_random_map(player_coordinates, number_of_obstacles, min_length_
         board = create_board(BOARD_WIDTH, BOARD_HEIGHT)
         items_coordinates = create_random_map(board, number_of_obstacles, player_coordinates, min_length_of_obstacles, max_length_of_obstacles)
         is_valid_board = validate_board(board, player_coordinates, items_coordinates)
-        view.display_board(board)
         if is_valid_board:
             return board
 
