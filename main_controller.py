@@ -6,12 +6,13 @@ from time import sleep
 
 def main():
     level = 0
+    difficulty = 8
     # view.display_intro_screen(board=model.create_board(model.BOARD_WIDTH, model.BOARD_HEIGHT))
     while True:
         level += 1
+        difficulty += 2
         model.PLAYER_ITEM['inventory'] = {}
-        board = model.create_board(model.BOARD_WIDTH, model.BOARD_HEIGHT)
-        model.create_valid_random_map(board, model.PLAYER_ITEM['coord'], model.BOARD_HEIGHT + model.BOARD_WIDTH + level, 1, 4)
+        board = model.create_valid_random_map(model.PLAYER_ITEM['coord'], model.BOARD_HEIGHT + model.BOARD_WIDTH + difficulty * 2, 1, 4)
         model.check_icons(board)
         while 'gate' not in model.PLAYER_ITEM['inventory']:
             util.clear_screen()
