@@ -34,7 +34,8 @@ def main():
                     sleep(3)
                     exit(1)
             if key == 'i':
-                print(model.PLAYER_ITEM['inventory'], "\nHP: ", model.PLAYER_ITEM['hp'], "\nLEVEL: ", level)
+                view.display_player_inventory(model.PLAYER_ITEM['inventory'])
+                print("HP: ", model.PLAYER_ITEM['hp'], "\nLEVEL: ", level)
                 sleep(2)
 
 
